@@ -1,5 +1,5 @@
 {
-  "name": "sort-by",
+  "name": "@ffha/sort-by",
   "version": "1.2.0",
   "description": "Sort objects by property names using native Array.sort()",
   "main": "index.js",

@@ -1,14 +1,10 @@
-var objectPath = require('object-path');
-var sortBy;
-var sort;
-var type;
-
+import objectPath from "object-path";
 /**
  * Filters args based on their type
  * @param  {String} type Type of property to filter by
  * @return {Function}
  */
-type = function(type) {
+function type(type) {
     return function(arg) {
         return typeof arg === type;
     };
@@ -20,13 +16,13 @@ type = function(type) {
  * @param  {Function} map Function to apply to each property
  * @return {Function}        Returns the comparator function
  */
-sort = function sort(property, map) {
+export function sort(property, map) {
     var sortOrder = 1;
     var apply = map || function(_, value) { return value };
 
     if (property[0] === "-") {
         sortOrder = -1;
-        property = property.substr(1);
+        property = property.slice(1);
     }
 
     return function fn(a,b) {
@@ -44,7 +40,7 @@ sort = function sort(property, map) {
  * Return a comparator function that sorts by multiple keys
  * @return {Function} Returns the comparator function
  */
-sortBy = function sortBy() {
+export default function sortBy() {
 
     var args = Array.prototype.slice.call(arguments);
     var properties = args.filter(type('string'));
@@ -65,9 +61,3 @@ sortBy = function sortBy() {
         return result;
     };
 };
-
-/**
- * Expose `sortBy`
- * @type {Function}
- */
-module.exports = sortBy;
